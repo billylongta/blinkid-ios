@@ -235,7 +235,7 @@ public actor CaptureService {
             // An object monitors changes to camera deivce observer (CDO) value.
             for await camera in systemPreferredCamera.changes {
                 // If the CDO isn't the currently selected camera, attempt to change to that device.
-                if let camera, currentDevice != camera {
+                if let camera, currentDevice != camera, camera.position == currentDevice.position {
                     logger.debug("Switching camera selection to the system-preferred camera.")
                     changeCaptureDevice(to: camera)
                 }
